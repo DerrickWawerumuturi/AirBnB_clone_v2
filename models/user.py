@@ -5,7 +5,9 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
-    __tablename__ = 'users'
+    
+    """ NEW ATTRS"""
+    __tablename__ = "users"
     email = Column(String(length=128), nullable=False)
     password = Column(String(length=128), nullable=False)
     attribute = Column(String(length=128), nullable=False)
