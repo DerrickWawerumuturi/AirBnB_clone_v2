@@ -116,16 +116,51 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
         if not args:
-            print("** class name missing **")
+            # print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+        else:
+            args_list = args.split(' ')
+            class_name = args_list[0]
+            
+            if class_name not in HBNBCommand.classes:
+                print('** class name does not exist')
+                return
+            # Create an instance of the class passed
+            new_instance =  HBNBCommand.classes[class_name]()
+            # iterate from index 1, excludinf the class_name,
+            # since it is not a parameter
+            
+            for params in (args_list[1:]):
+                #split  the parameter based on '='
+                parameter  = params.split('=')
+                # check if user enter enterered correct num of params
+                if (len(parameter) == 2):
+                    #get the key
+                    key = parameter[0]
+                    # get the value of the key
+                    value = parameter[1].replace('_',' ')
+                    
+                    if (len(value) >= 2 and value[0] == '"' and value[-1] == '"'):
+                        # remove surrounding quotes
+                        value = value[1:-1]
+                        # remove escaped quotes
+                        value = value.replace('\\"', '"')
 
+                    # check if value is a float
+                    elif "." in value:
+                        try:
+                            value = float(value)
+                        except ValueError:
+                            continue
+                    #check if value is an int
+                    else:
+                        try:
+                            value =  int(value)
+                        except ValueError:
+                            continue
+                    new_instance.save()
+                    print(new_instance.id)
+                         
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
