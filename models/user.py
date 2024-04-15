@@ -8,7 +8,7 @@ class User(BaseModel, Base):
     
     """ NEW ATTRS"""
     __tablename__ = "users"
-    email = Column(String(length=128), nullable=False)
-    password = Column(String(length=128), nullable=False)
-    attribute = Column(String(length=128), nullable=False)
-    last_name = Column(String(length=128), nullable=False)
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    attribute = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
