@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-class City(BaseModel):
+class City(BaseModel, Base):
     """ The city class, contains state ID and name """
     
     """ Adding class attributes """
