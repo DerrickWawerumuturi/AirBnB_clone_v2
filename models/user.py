@@ -9,16 +9,11 @@ from models.review import Review
 
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
-    # email = ''
-    # password = ''
-    # first_name = ''
-    # last_name = ''
-
-    """New attrs"""
     __tablename__ = "users"
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    attribute = Column(String(128), nullable=False)
-    last_name = Column(String(128), nullable=False)
+    email = Column('email',String(128), nullable=False)
+    password = Column('password',String(128), nullable=False)
+    attribute = Column('attribute',String(128), nullable=False)
+    first_name = Column('first_name',String(128), nullable=False)
+    last_name = Column('last_name',String(128), nullable=False)
     places = relationship('Place', backref='user',cascade='all, delete')
     reviews = relationship('Review', backref='user', cascade="all, delete")
