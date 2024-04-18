@@ -17,4 +17,4 @@ class User(BaseModel, Base):
     # would not run with it in. This line was implemented in Task 8
     places = relationship("Place", cascade="delete", backref="user")
     # Below line is commented out for caution and was added in Task 9
-    reviews = relationship("Review", cascade="delete", backref="user")
+    #reviews = relationship("Review", cascade="delete", backref="user")
