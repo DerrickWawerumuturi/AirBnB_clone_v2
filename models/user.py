@@ -1,33 +1,23 @@
 #!/usr/bin/python3
 """This module defines a class User"""
-from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from models.place import Place
-from models.review import Review
 
 
-# Creating a class for the
 class User(BaseModel, Base):
-    """This class defines a user by various attributes
-    Attributes:
-        email: email address
-        password: password for your login
-        first_name: first name
-        last_name: Last name
-    """
-    # Defining table name for the user model
+    """This class defines a user by various attributes"""
     __tablename__ = "users"
-
-    # Defining columns for the user Table
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
-
-    # Defining relationships with other models
-    # Relationship with the place model, cascade delete
+    email = Column('email', String(128), nullable=False)
+    password = Column('password', String(128), nullable=False)
+    first_name = Column('first_name', String(128),
+                        nullable=True, default="NULL")
+    last_name = Column('last_name', String(128), nullable=True, default="NULL")
+    # backref may need to be back_populates?Below line commented out bc console
+    # would not run with it in. This line was implemented in Task 8
+    places = relationship("Place", cascade="delete", backref="user")
+    # Below line is commented out for caution and was added in Task 9
+    reviews = relationship("Review", cascade="delete", backref="user")
     places = relationship("Place", cascade='all, delete, delete-orphan',
                           backref="user")
     # Relationship with the Review model, cascade delete
