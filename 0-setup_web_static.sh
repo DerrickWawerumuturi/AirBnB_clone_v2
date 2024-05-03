@@ -1,57 +1,40 @@
 #!/usr/bin/env bash
+# Script that sets up yourweb_static_20231224143233.tgz web servers for the deployment of web_static
 
-# check if Nginx is installed
-if !nginx -v; then
-	sudo apt -y update
-	sudo apt install -y nginx
+# Install Nginx if it not already installed
+if ! nginx -v; then
+    sudo apt -y update
+    sudo apt install -y nginx
 fi
 
-# create folder /data/
-if [ ! -d "/data"]; then
-	sudo mkdir /data/
-fi
+# Create the folder /data/web_static/releases/ if it doesn’t already exist
+sudo mkdir -p "/data/web_static/releases/test"
 
-# create folder /data/web_static/
-if [ ! -d "/data/web_static/"]; then
-        sudo mkdir /data/web_static/
-fi
+# Create the folder /data/web_static/shared/ if it doesn’t already exist
+sudo mkdir -p "/data/web_static/shared/"
 
-# create folder /data/web_static/releases/
-if [ ! -d "/data/web_static/releases/"]; then
-        sudo mkdir /data/web_static/releases/
-fi
-
-# create folder /data/web_static/shared/
-if [ ! -d "/data/web_static/shared/"]; then
-        sudo mkdir /data/web_static/shared/
-fi
-
-# create /data/web_static/releases/test/
-if [ ! -d "/data/web_static/releases/test/"]; then
-        sudo mkdir /data/web_static/releases/test/
-fi
-
-# fake html file for testing 
+# Create a fake HTML file /data/web_static/releases/test/index.html
 echo "<html>
   <head>
   </head>
   <body>
-    <h1> Derrick Muturi vs Nginx </h>
+    <h1>Adam is almost a Full Stack Software Engineer</h1>
   </body>
 </html>" | sudo tee "/data/web_static/releases/test/index.html" > /dev/null
 
-# create a symbolic link
+# a symbolic link /data/web_static/current linked to the /data/web_static/releases/test/ folder
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
-# give ownership of /data/ folder to the ubuntu us/data/web_static/currenter
-sudo chown -R ubuntu: ubuntu/data
+# Give ownership of the /data/ folder to the ubuntu user AND group
+sudo chown -R ubuntu:ubuntu /data/
 
-#update Nginx config to serve content of /data/web_static/current/ to hbnb_static
+# Update the Nginx configuration to serve the content of /data/web_static/current/ to hbnb_static
 if [ -e "/etc/nginx/sites-available/default_backup" ]; then
-       sudo cp /etc/nginx/sites-available/default_backup /etc/nginx/sites-available/default
+        sudo cp /etc/nginx/sites-available/default_backup /etc/nginx/sites-available/default
 else
-       sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
+        sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
 fi
 sed -i "0,/location \/ {/s||location \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current\/;\n\t}\n\n\t&|" /etc/nginx/sites-available/default
 
+# Restart nginx
 sudo service nginx restart
