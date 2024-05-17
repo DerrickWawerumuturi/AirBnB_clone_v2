@@ -5,7 +5,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.get('/', strict_slashes=False)
+@app.get('/')
 def hello():
     """
     string to return when on / route
