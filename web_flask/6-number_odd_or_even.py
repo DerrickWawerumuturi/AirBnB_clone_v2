@@ -60,5 +60,10 @@ def odd_or_even(n):
     """
     display number if either it is od or even
     """
+    if n % 2 == 0:
+        render_template("6-number_odd_or_even.html", number=n, value="even")
+    else:
+        render_template("6-number_odd_or_even.html", number=n, value="odd")
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
