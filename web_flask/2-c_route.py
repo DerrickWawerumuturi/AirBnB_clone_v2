@@ -21,6 +21,10 @@ def hello_world():
 
 @app.route("/c/<text>", strict_slashes=False)
 def variable(text):
+    """
+    replace _ from the text with a space 
+    return C together with the next
+    """
     text = text.replace('_', ' ')
     return f"C {text}"
 
