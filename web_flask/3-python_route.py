@@ -12,7 +12,7 @@ def hello():
     """
     return "Hello HBNB!"
 
-@app.get('/hbnb')
+@app.route('/hbnb')
 def hello_world():
     """
     show  on /hbnb
@@ -29,6 +29,7 @@ def variable(text):
     return f"C {text}"
 
 
+@app.route("/python/", strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def text(text="is cool"):
     """
