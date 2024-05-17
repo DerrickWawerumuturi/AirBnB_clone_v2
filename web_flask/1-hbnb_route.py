@@ -10,9 +10,9 @@ def hello():
     """
     string to return when on / route
     """
-    return "Hello HBNB!"
+    return ('Hello HBNB!')
 
-@app.get('/hbnb')
+@app.get('/hbnb', strict_slashes=False)
 def hello_world():
     """
     show  on /hbnb
