@@ -4,9 +4,12 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_hbnb(strict_slashes=False):
-    """ server as home page"""
+@app.route('/', strict_slashes=False)
+def hello_hbnb():
+    """ 
+    server as home page
+    Returns: string
+    """
     return "Hello HBNB!"
 
 if __name__ == "__main__":
