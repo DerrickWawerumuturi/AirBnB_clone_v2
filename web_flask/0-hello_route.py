@@ -1,26 +1,24 @@
 #!/usr/bin/python3
 """
-First Flask web application module
-This module creates a simple Flask web application that returns
-a "Hello HBNB!" message on the home page.
+Routes Hello
 """
-
 from flask import Flask
+
 
 app = Flask(__name__)
 
-@app.route("/", strict_slashes=False)
-def hello_world():
+
+@app.route('/')
+def hello_world(strict_slashes=False):
     """
-    Serves as the home page
+    Hello World
+
     Returns:
-        str: The string "Hello HBNB!"
+        [String] -- [Hello HBNB!]
     """
     return 'Hello HBNB!'
 
+
 if __name__ == "__main__":
-    """
-    Running the Flask application
-    """
     app.run(host='0.0.0.0', port=5000)
 
