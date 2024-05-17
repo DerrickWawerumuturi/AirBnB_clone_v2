@@ -1,68 +1,44 @@
 #!/usr/bin/python3
-"""
-Routes Hello
-"""
-from flask import Flask
-import os
+"routes to / and  /hbnb"
 
+from flask import Flask
 
 app = Flask(__name__)
 
-
-@app.route('/')
-def hello_world(strict_slashes=False):
+@app.get('/', strict_slashes=False)
+def hello():
     """
-    Hello World
-
-    Returns:
-        [String] -- [Hello HBNB!]
+    string to return when on / route
     """
-    return 'Hello HBNB!'
+    return "Hello HBNB!"
 
-
-@app.route('/hbnb')
-def hbnb(strict_slashes=False):
+@app.route('/hbnb', strict_slashes=False)
+def hello_world():
     """
-    HBNB
-
-    Returns:
-        [String] -- [HBNB]
+    show  on /hbnb
     """
-    return 'HBNB'
+    return "HBNB"
 
-
-@app.route('/c/<path:subpath>')
-def cisfun(subpath, strict_slashes=False):
+@app.route("/c/<text>", strict_slashes=False)
+def variable(text):
     """
-    HBNB
-
-    Returns:
-        [String] -- [HBNB]
+    replace _ from the text with a space 
+    return C together with the next
     """
-    return 'C {}'.format(subpath.replace('_', ' '))
+    text = text.replace('_', ' ')
+    return f"C {text}"
 
 
-@app.route('/python/<path:subpath>')
-def pythonwpath(subpath, strict_slashes=False):
+@app.route("/python/", strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def text(text="is cool"):
     """
-    HBNB
-
-    Returns:
-        [String] -- [HBNB]
+    replace _ in the text with a space
+    default of text is 'is cool'
+    Return: Python <text>
     """
-    return 'Python {}'.format(subpath.replace('_', ' '))
-
-
-@app.route('/python/')
-def pythonwoutpath(strict_slashes=False):
-    """
-    HBNB
-
-    Returns:
-        [String] -- [HBNB]
-    """
-    return 'Python is cool'
-
+    text = text.replace('_', ' ')
+    return f"Python {text}"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
