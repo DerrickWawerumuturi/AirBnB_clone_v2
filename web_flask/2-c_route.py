@@ -21,6 +21,7 @@ def hello_world():
 
 @app.get("/c/<text>")
 def variable(text):
+    text = text.replace('_', ' ')
     return f"C {text}"
 
 if __name__ == "__main__":
