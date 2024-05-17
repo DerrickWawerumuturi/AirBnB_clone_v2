@@ -19,7 +19,7 @@ def hello_world():
     """
     return "HBNB"
 
-@app.get("/c/<text>")
+@app.route("/c/<text>", strict_slashes=False)
 def variable(text):
     text = text.replace('_', ' ')
     return f"C {text}"
