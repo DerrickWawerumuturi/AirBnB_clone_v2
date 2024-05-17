@@ -1,16 +1,24 @@
 #!/usr/bin/python3
-""" first flask web application"""
+#!/usr/bin/python3
+"""
+Routes Hello
+"""
 from flask import Flask
+
 
 app = Flask(__name__)
 
-@app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """ 
-    server as home page
-    Returns: string
+
+@app.route('/')
+def hello_world(strict_slashes=False):
     """
-    return "Hello HBNB!"
+    Hello World
+
+    Returns:
+        [String] -- [Hello HBNB!]
+    """
+    return 'Hello HBNB!'
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
