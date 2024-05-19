@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
-
 import os
-
 from models.user import User
 from models.base_model import BaseModel, Base
 from models.place import Place
