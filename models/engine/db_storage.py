@@ -118,3 +118,7 @@ class DBStorage:
     def close(self):
         """removes the current scoped session"""
         self.__session.remove()
+        
+    def close(self):
+        """ class method to close current db using flask"""
+        self.session.close()
